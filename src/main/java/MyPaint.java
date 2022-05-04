@@ -14,6 +14,9 @@ public class MyPaint extends JFrame {
     private JButton btnObrisi;
     private JComboBox cbBoje;
     private String[] boje = {"Crna", "Crvena", "Plava"};
+    private JMenuBar menuBar;
+    private JMenu mFile;
+    private JMenuItem miSave, miLoad;
 
     public MyPaint(){
         super();
@@ -21,6 +24,8 @@ public class MyPaint extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(new Rectangle(600,200,width,height));
         setLayout(new BorderLayout());
+
+
 
         initComponents();
         addComponents();
@@ -76,18 +81,26 @@ public class MyPaint extends JFrame {
         rbpravougraonik = new JRadioButton("Pravougaonik");
         rbGrupa = new ButtonGroup();
         cbBoje = new JComboBox(boje);
+        menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        mFile = new JMenu("File");
+        miSave = new JMenuItem("Save");
+        miLoad = new JMenuItem("Load");
+
     }
 
     private void addComponents(){
         add(pToolbar, BorderLayout.NORTH);
         add(pMainPanel, BorderLayout.CENTER);
         pToolbar.setLayout(new FlowLayout(FlowLayout.LEFT,10,10));
+        menuBar.add(mFile);
+        mFile.add(miSave);
+        mFile.add(miLoad);
         pToolbar.add(rblinija);
         pToolbar.add(rbpravougraonik);
         pToolbar.add(rbkrug);
         pToolbar.add(cbBoje);
         pToolbar.add(btnObrisi);
-
 
         rbGrupa.add(rbkrug);
         rbGrupa.add(rblinija);

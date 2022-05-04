@@ -85,7 +85,7 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
                 break;
             case KRUG:
                 fig = new Krug(new Point(Math.min(start.x,end.x), Math.min(start.y,end.y)),
-                                         Math.abs(start.x - end.x));
+                              Math.abs(start.x - end.x));
                 break;
             case PRAVOUGAONIK:
                 Point startPoint = new Point(Math.min(start.x, end.x), Math.min(start.y, end.y));
