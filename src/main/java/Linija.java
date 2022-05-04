@@ -11,6 +11,7 @@ public class Linija extends Element {
 
     @Override
     void paint(Graphics g) {
+        super.paint(g);
         g.drawLine(p1.x,p1.y,p2.x,p2.y);
     }
 }

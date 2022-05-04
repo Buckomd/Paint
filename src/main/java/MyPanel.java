@@ -11,6 +11,7 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
     private Point start = null;
     private ArrayList<Element> figure;
     private Element elem = null;
+    private Color boja = Color.BLACK;
 
 
     public MyPanel(){
@@ -18,6 +19,18 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
         addMouseListener(this);
         addMouseMotionListener(this);
     }
+
+    public void setBoja(String boja){
+        if(boja.equals("Crna"))
+            this.boja = Color.BLACK;
+        else if (boja.equals("Plava"))
+            this.boja = Color.BLUE;
+        else if (boja.equals("Crvena" ))
+            this.boja = Color.RED;
+        else
+            this.boja = Color.BLACK;
+    }
+
 
     public void obrisi(){
         this.figure.clear();
@@ -64,22 +77,28 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
     @Override
     public void mouseReleased(MouseEvent e) {
         Point end = e.getPoint();
+        Element fig = null;
 
         switch (this.selektovan){
             case LINIJA:
-                this.figure.add(new Linija(start,end));
+                fig = new Linija(start,end);
                 break;
             case KRUG:
-                this.figure.add(new Krug(new Point(Math.min(start.x,end.x), Math.min(start.y,end.y)),
-                                         Math.abs(start.x - end.x)));
+                fig = new Krug(new Point(Math.min(start.x,end.x), Math.min(start.y,end.y)),
+                                         Math.abs(start.x - end.x));
                 break;
             case PRAVOUGAONIK:
                 Point startPoint = new Point(Math.min(start.x, end.x), Math.min(start.y, end.y));
                 int w = Math.abs(start.x - end.x);
                 int h = Math.abs(start.y - end.y);
-                this.figure.add(new Pravougaonik(startPoint,h,w));
+                fig = new Pravougaonik(startPoint,h,w);
                 break;
         }
+        if( fig != null){
+            fig.setBoja(this.boja);
+            this.figure.add(fig);
+        }
+        elem = null;
         repaint();
     }
 
@@ -103,6 +122,7 @@ public class MyPanel extends JPanel implements MouseListener, MouseMotionListene
                 elem = new Pravougaonik(startPoint,h,w);
                 break;
         }
+        elem.setBoja(this.boja);
         repaint();
     }
 

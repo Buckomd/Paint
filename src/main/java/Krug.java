@@ -12,6 +12,7 @@ public class Krug extends Element{
 
     @Override
     void paint(Graphics g) {
+        super.paint(g);
         g.drawOval(p.x,p.y,radius,radius);
     }
 }

@@ -6,18 +6,20 @@ import java.awt.event.ActionListener;
 public class MyPaint extends JFrame {
 
     private final String title = "MyPaint v1.0.0";
-    private int width = 400, height = 400;
+    private int width = 500, height = 400;
     private JPanel pToolbar;
     private MyPanel pMainPanel;
     private JRadioButton rbkrug, rblinija, rbpravougraonik;
     private ButtonGroup rbGrupa;
     private JButton btnObrisi;
+    private JComboBox cbBoje;
+    private String[] boje = {"Crna", "Crvena", "Plava"};
 
     public MyPaint(){
         super();
         setTitle(title);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setBounds(new Rectangle(100,100,width,height));
+        setBounds(new Rectangle(600,200,width,height));
         setLayout(new BorderLayout());
 
         initComponents();
@@ -54,6 +56,15 @@ public class MyPaint extends JFrame {
                 pMainPanel.obrisi();
             }
         });
+
+        cbBoje.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox cb = (JComboBox) e.getSource();
+                String selektovanaBoja = (String) cb.getSelectedItem();
+                pMainPanel.setBoja(selektovanaBoja);
+            }
+        });
     }
 
     private void initComponents(){
@@ -64,6 +75,7 @@ public class MyPaint extends JFrame {
         rblinija = new JRadioButton("Linija");
         rbpravougraonik = new JRadioButton("Pravougaonik");
         rbGrupa = new ButtonGroup();
+        cbBoje = new JComboBox(boje);
     }
 
     private void addComponents(){
@@ -73,7 +85,9 @@ public class MyPaint extends JFrame {
         pToolbar.add(rblinija);
         pToolbar.add(rbpravougraonik);
         pToolbar.add(rbkrug);
+        pToolbar.add(cbBoje);
         pToolbar.add(btnObrisi);
+
 
         rbGrupa.add(rbkrug);
         rbGrupa.add(rblinija);

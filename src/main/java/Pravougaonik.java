@@ -13,6 +13,7 @@ public class Pravougaonik extends Element {
 
     @Override
     void paint(Graphics g) {
+        super.paint(g);
         g.drawRect(p.x,p.y,width,height);
     }
 }
