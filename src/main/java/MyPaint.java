@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 
 public class MyPaint extends JFrame {
 
@@ -17,6 +18,7 @@ public class MyPaint extends JFrame {
     private JMenuBar menuBar;
     private JMenu mFile;
     private JMenuItem miSave, miLoad;
+
 
     public MyPaint(){
         super();
@@ -68,6 +70,20 @@ public class MyPaint extends JFrame {
                 JComboBox cb = (JComboBox) e.getSource();
                 String selektovanaBoja = (String) cb.getSelectedItem();
                 pMainPanel.setBoja(selektovanaBoja);
+            }
+        });
+
+        miSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pMainPanel.savetoFile(pMainPanel);
+            }
+        });
+
+        miLoad.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pMainPanel.readFromFile(pMainPanel);
             }
         });
     }
